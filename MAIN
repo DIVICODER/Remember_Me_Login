@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>LOGIN</title>
+<style>
+body{
+display:flex;
+height: 100px;  
+background-size: cover;  
+background-image: url("purple1.jpg"); 
+}
+
+.container{
+width:300px;
+padding:50px;
+position: absolute;
+top: 10%;
+left: 35%;
+right: 35%;
+bottom: 10%;
+background-color:#8d0133;
+border:1px solid #ccc;
+border-radius:6px;
+}
+.container h1{
+text-align:center;
+justify-content:center;
+margin-bottom:10px;
+font-size:30px;
+color:#000137;
+}
+.container h4{
+text-align:center;
+justify-content:center;
+margin-top:10px;
+color:#000137;
+}
+.container label{
+display:block;
+margin-bottom:10px;
+font-size:20px;
+color:#000137;
+
+
+}
+.container input[type="submit"]{
+width:300px;
+height:40px;
+border-radius:20px;
+font-size:20px;
+background-color:white;
+}
+.container input[type="text"],
+
+.container input[type="password"]{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+</style>
+</head>
+<body>
+
+<script>
+function validateForm() {
+  // Get the input values
+  var name = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+ var rememberMe = document.getElementById('remember').checked;
+
+  // Validate the name field (for example, at least 3 characters)
+  if (name.length < 3) {
+    alert('Name must be at least 3 characters long.');
+    return false; // Prevent form submission
+  }
+
+  // Validate the password field (for example, at least 6 characters)
+  if (password.length < 6) {
+    alert('Password must be at least 6 characters long.');
+    return false; // Prevent form submission
+  }
+
+  // If the form passes validation, you can proceed with form submission
+  // (return true)
+
+  // Alternatively, you can submit the form using JavaScript (AJAX) if you want
+  // to handle the form submission asynchronously without page refresh.
+
+  // return true;
+
+  // Save the user's choice of login method (rememberMe) in a cookie or local storage
+  if (rememberMe) {
+    // Save the choice as a cookie (expires in 30 days)
+    document.cookie = 'rememberMe=true; expires=' + new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+  } else {
+    // Remove the cookie (in case the user unchecks the checkbox)
+    document.cookie = 'rememberMe=; expires=' + new Date(0).toUTCString();
+  }
+
+  // Prevent form submission (since we're only demonstrating the feature)
+  return false;
+}
+// Check if the "rememberMe" cookie is set and update the checkbox accordingly
+window.onload = function() {
+  var rememberMe = document.getElementById('remember');
+  rememberMe.checked = document.cookie.includes('rememberMe=true');
+};
+</script>
+
+
+<div class="container">
+<h1>WELCOME BACK</h1>
+<h4>login to your Account</h4>
+<form onsubmit="return validateForm()" method="post">
+<label> Name</label>
+<input type="text" id="username" name="username" placeholder="Enter your name" />
+<br><br>
+<label> Password</label>
+<input type="password" id="password" name="password" placeholder="Enter your password" />
+<br><br>
+<label> Forget Password?</label>
+<br>
+<label for="remember">Remember Me:</label>
+<input type="checkbox" id="remember" name="remember">
+<br><br>
+<input type="submit" value="Login">
+</form>
+</div>
+</body>
+</html>
